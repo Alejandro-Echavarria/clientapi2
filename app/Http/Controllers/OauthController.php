@@ -13,11 +13,11 @@ class OauthController extends Controller
         $request->session()->put('state', $state = Str::random(40));
 
         $query = http_build_query([
-            'client_id' => config('services.api.client_id'),
-            'redirect_uri' => route('callback'),
+            'client_id'     => config('services.api.client_id'),
+            'redirect_uri'  => route('callback'),
             'response_type' => 'code',
-            'scope' => '',
-            'state' => $state,
+            'scope'         => 'create-post read-post update-post delete-post',
+            'state'         => $state,
         ]);
 
         return redirect('http://api.test/oauth/authorize?' . $query);
